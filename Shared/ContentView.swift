@@ -13,7 +13,7 @@ struct DetailView1: View {
     var body: some View {
         VStack {
             NavigationLink(destination: DetailView2()) {
-                Text("Tap to dismiss DetailView and show DetailView2")
+                Text("Tap to dismiss DetailView1 and show DetailView2")
                     .onTapGesture {
                         self.presentationMode.wrappedValue.dismiss()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -33,12 +33,13 @@ struct DetailView2: View {
         )
     }
 }
+
 struct RootView: View {
     @State var isActive: Bool = false
     var body: some View {
         VStack {
-            NavigationLink(destination: DetailView1(isActive: $isActive))
-            { Text("This is root view. Tap to go to DetailView") }
+            NavigationLink(destination: DetailView1(isActive: $isActive)) { Text("This is root view. Tap to go to DetailView1")
+            }
             
             NavigationLink(destination: DetailView2() ,isActive: self.$isActive) {
                     EmptyView()
@@ -46,6 +47,7 @@ struct RootView: View {
         }
     }
 }
+
 struct ContentView: View {
     var body: some View {
         NavigationView {
